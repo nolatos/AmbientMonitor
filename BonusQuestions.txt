@@ -1,0 +1,10 @@
+1. How would the model respond to sensor failures where the readings are missing or incorrect?
+A: With the cross validation, we take a lot of readings, then take a median for the best corresponding values. Thus, anomalies like this would very likely not cause
+much damage, unless there were a lot of it. In this case, it would be difficult to distinguish corrupt data from real data.
+
+2. Are there any pieces of information missing that could help predict the conditions?
+A: In my experience, I found the information such as raining and cloudiness has little impact on both temperature and humidity, thus I left them out in fear of 
+overfitting the data. Personally, I think information such as outside temperature, or AC temperature, if applicable would be very helpful.
+
+3. Can you think of any other changes or solutions the museum could explore to help keep the artifacts safe? 
+A: Honestly, just don't let the visitors handle the artifacts. Just about every museum I've been to has a "no touching" rule. 

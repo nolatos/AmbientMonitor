@@ -2,6 +2,7 @@ package view;
 
 import data.Input;
 import data.LearnHandler;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -39,6 +40,10 @@ public class View {
     private Button predictButton;
 
     @FXML
+    private Label validatingLabel;
+
+
+    @FXML
     void go(ActionEvent event) {
         if (textField.getText().equals("")) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Please enter a valid file name", ButtonType.OK);
@@ -52,6 +57,12 @@ public class View {
                     try {
                         Input.initialise(textField.getText());
                         maxValues = LearnHandler.getSize();
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                outputBox.setText("Done!");
+                            }
+                        });
                     }
                     catch (FileNotFoundException fnfex) {
                         Alert alert = new Alert(Alert.AlertType.ERROR, "Please enter a valid file name", ButtonType.OK);
@@ -66,23 +77,32 @@ public class View {
         }
     }
 
+
+
     @FXML
     void validate(ActionEvent event) {
         Task<Void> task = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
                 LearnHandler.crossValidate(choiceBox.getValue());
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        validatingLabel.setText("");
+                        outputBox.setText("Finished validation!");
+                    }
+                });
                 return null;
             }
         };
         Thread thread = new Thread(task);
         thread.start();
-
+        validatingLabel.setText("validating...");
     }
 
     @FXML
     public void initialize() {
-        choiceBox.setItems(FXCollections.observableArrayList(10, 100, 100));
+        choiceBox.setItems(FXCollections.observableArrayList(10, 100, 1000));
 
     }
 
