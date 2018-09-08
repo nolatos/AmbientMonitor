@@ -1,6 +1,6 @@
 AmbientMonitor
 ## Running the application
-To run the application, just like any jar, either double click it, or navigate on the command line into the directory containing the jar, then type java -jar AmbientMonitor.jar
+To run the application, please first make sure its extension is "jar". If not, please rename it such. After that, just like any jar, either double click it, or navigate on the command line into the directory containing the jar, then type java -jar AmbientMonitor.jar
 
 Once this is done, please type the name of the data file into the text field, and press load to load the data.
 The application can now make a prediction, though cross-validating it should make it more accurate. To cross validate, simply select a number in the drop-down menu, then click validate.
