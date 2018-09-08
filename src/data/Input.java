@@ -11,27 +11,22 @@ import java.util.Scanner;
  */
 public class Input {
 
-    public static void initialise(String fileName) {
+    public static void initialise(String fileName) throws FileNotFoundException{
         boolean initial = true;
-        try {
-            File file = new File(fileName);
-            Scanner scanner = new Scanner(file);
-            scanner.nextLine();
+        File file = new File(fileName);
+        Scanner scanner = new Scanner(file);
+        scanner.nextLine();
 
-            //Scanning the file
-            while (scanner.hasNextLine()) {
-                String[] line = scanner.nextLine().split(",");
-                LearnHandler.addMuseum(new Museum(Integer.parseInt(line[0]), Double.parseDouble(line[1]),
-                        Double.parseDouble(line[2]), Boolean.parseBoolean(line[3]),
-                        Boolean.parseBoolean(line[4]), Boolean.parseBoolean(line[5]))); //Adding in all the information
-                if (initial) {
-                    LearnHandler.initialise(); //Initialises the original predictions
-                    initial = false;
-                }
+        //Scanning the file
+        while (scanner.hasNextLine()) {
+            String[] line = scanner.nextLine().split(",");
+            LearnHandler.addMuseum(new Museum(Integer.parseInt(line[0]), Double.parseDouble(line[1]),
+                    Double.parseDouble(line[2]), Boolean.parseBoolean(line[3]),
+                    Boolean.parseBoolean(line[4]), Boolean.parseBoolean(line[5]))); //Adding in all the information
+            if (initial) {
+                LearnHandler.initialise(); //Initialises the original predictions
+                initial = false;
             }
-        }
-        catch (FileNotFoundException fnfex) {
-            fnfex.printStackTrace();
         }
     }
 }

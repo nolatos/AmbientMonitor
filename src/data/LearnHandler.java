@@ -184,7 +184,6 @@ public class LearnHandler {
         temperaturePreviousIterations = previousTemperatureIterations;
         humidityPreviousIterations = previousHumidityIterations;
 
-        System.out.println("alpha is " + LearnHandler.alphaTemperature  + " previous is " + temperaturePreviousIterations);
     }
 
     public static double predictHumidity(int index, int humidityPreviousIterations, double alphaHumidityClosed, double alphaHumidityOpen) {
@@ -259,6 +258,10 @@ public class LearnHandler {
 
     public static double predictHumidity(int index) {
         return predictHumidity(index, temperaturePreviousIterations, alphaHumidityClosed, alphaHumidityOpen);
+    }
+
+    public static int getSize() {
+        return museumList.size();
     }
 
 }
